@@ -149,46 +149,43 @@ var techs = [
 {name:"Block",cat:"defending",diff:"Easy",desc:"Time a stationary block on a shot or pass.",input:"Hold Block"},
 {name:"Jockeying",cat:"defending",diff:"Medium",desc:"Backpedal facing the dribbler instead of tackling.",input:"Backwards movement"}
 ];
-
-var styles = [
-{name:"Isagi",role:"Playmaker",rarity:"Rare",desc:"Strategic all-rounder rewarding good positioning.",flow:"Spatial Awareness"},
-{name:"Chigiri",role:"Speedster",rarity:"Rare",desc:"Built entirely around speed and stamina bursts.",flow:"Best with Puzzle"},
-{name:"Bachira",role:"Dribbler",rarity:"Epic",desc:"Energetic, unpredictable close control.",flow:"Best with Monster"},
-{name:"King / Barou",role:"Striker",rarity:"Epic",desc:"Ruthless individualistic finisher.",flow:"Best with King's Instinct"},
-{name:"Gagamaru",role:"Goalkeeper",rarity:"Epic",desc:"The only dedicated goalkeeper style.",flow:"Best with Genius"},
-{name:"Rin",role:"Curve Striker",rarity:"Epic",desc:"Signature curve shots into tough angles.",flow:"Best with Prodigy"},
-{name:"Kurona",role:"Passer",rarity:"Epic",desc:"Quick link-up plays and team chemistry.",flow:"Best with Genius"},
-{name:"Igaguri",role:"Midfielder",rarity:"Epic",desc:"Defensively stable central midfielder.",flow:"Best with Monster"},
-{name:"Charles",role:"Midfielder",rarity:"Epic",desc:"Balanced, dependable midfield option.",flow:"Best with Genius"},
-{name:"NEL Bachira",role:"Chaos Dribbler",rarity:"Mythic",desc:"Buffed Bachira with sharper transitions.",flow:"Best with Bee Freestyle"},
-{name:"Yukimiya",role:"Flank Dribbler",rarity:"Mythic",desc:"High skill-ceiling carry style.",flow:"Best with Dribbler"},
-{name:"Kunigami",role:"Power Striker",rarity:"Mythic",desc:"Power shots paired with useful blocking.",flow:"Best with King's Instinct"},
-{name:"Aiku",role:"Defender",rarity:"Mythic",desc:"Premier defensive style with trap and steal.",flow:"Best with Soul Harvester"},
-{name:"Hiori",role:"Playmaker",rarity:"Mythic",desc:"The best pure passer in the game.",flow:"Personalized Flow Ice"},
-{name:"Nagi",role:"Trap Specialist",rarity:"Legendary",desc:"Controls difficult passes naturally.",flow:"Best with Wildcard"},
-{name:"Shidou",role:"Aerial Striker",rarity:"Legendary",desc:"Wild striker built around aerial chaos.",flow:"Best with Demon Wings"},
-{name:"Reo",role:"Versatile Playmaker",rarity:"Legendary",desc:"Balanced offense and defense toolkit.",flow:"Best with Genius"},
-{name:"Otoya",role:"Evasive Dribbler",rarity:"Legendary",desc:"Stealthy, evasive movement style.",flow:"Best with Puzzle"},
-{name:"Karasu",role:"Defensive Dribbler",rarity:"Legendary",desc:"Yukimiya-style dribbling with a defensive lean.",flow:"Best with Monster"},
-{name:"Sae",role:"Curve Striker",rarity:"World Class",desc:"Like Rin but faster, combos with Shidou.",flow:"Best with Prodigy"},
-{name:"Kaiser",role:"Center Forward",rarity:"World Class",desc:"Dominant pure striker in the current meta.",flow:"Best with Impulse"},
-{name:"Don Lorenzo",role:"Midfielder",rarity:"World Class",desc:"Top meta midfield pick controlling tempo.",flow:"Best with Emperor"},
-{name:"NEL Isagi",role:"Playmaker",rarity:"World Class",desc:"Powered-up Isagi with sharper finishing.",flow:"Best with Genius"},
-{name:"NEL Rin",role:"Curve Striker",rarity:"World Class",desc:"Amplified curve-shot kit.",flow:"Best with Destructive Impulse"},
-{name:"NEL Nagi",role:"Trap Specialist",rarity:"World Class",desc:"Trap-and-control kit pushed to its limit.",flow:"Best with Emperor"},
-{name:"NEL Reo",role:"Versatile Playmaker",rarity:"World Class",desc:"Reo reworked and dramatically stronger.",flow:"Best with Butterfly Dancer"},
-{name:"Lavinho",role:"Winger",rarity:"Master Class",desc:"Top-tier winger known for pace.",flow:"Best with King's Authority"},
-{name:"Loki",role:"Master Class",rarity:"Master Class",desc:"Extreme mobility for explosive attacks.",flow:"Best with Gale Burst"}
-];
-
+ Class
 function renderTechs(filter){
 var grid=document.getElementById('techGrid');
 grid.innerHTML='';
 for(var i=0;i<techs.length;i++){
 var t=techs[i];
 if(filter!=='all'&&t.cat!==filter)continue;grid.innerHTML+='<div class="card"><div class="card-top"><span class="card-cat">'+t.cat+'</span><span class="card-diff">'+t.diff+'</span></div><h3>'+t.name+'</h3><p>'+t.desc+'</p><span class="input-tag">'+t.input+'</span></div>';
-}
-}
+var styles = [
+{name:"Isagi",role:"Playmaker",rarity:"Rare",desc:"Strategic all-rounder rewarding good positioning.",flow:"Spatial Awareness"},
+{name:"Chigiri",role:"Speedster",rarity:"Rare",desc:"Built entirely around speed and stamina bursts.",flow:"Best with Puzzle"},
+{name:"Hiori",role:"Playmaker",rarity:"Rare",desc:"Strong passer focused on dribbling and distribution.",flow:"Personalized Flow Ice"},
+{name:"Igaguri",role:"Defender",rarity:"Rare",desc:"Stealing, passing, and aerial defense fundamentals.",flow:"Best with Monster"},
+{name:"Bachira",role:"Dribbler",rarity:"Epic",desc:"Energetic, unpredictable close control.",flow:"Best with Monster"},
+{name:"Gagamaru",role:"Goalkeeper",rarity:"Epic",desc:"The only dedicated goalkeeper style.",flow:"Best with Genius"},
+{name:"Kurona",role:"Passer",rarity:"Epic",desc:"Quick link-up plays and team chemistry.",flow:"Best with Genius"},
+{name:"Nagi",role:"Trap Specialist",rarity:"Legendary",desc:"Controls difficult passes naturally.",flow:"Best with Wildcard"},
+{name:"Otoya",role:"Evasive Dribbler",rarity:"Legendary",desc:"Stealthy, evasive movement style.",flow:"Best with Puzzle"},
+{name:"Karasu",role:"Defensive Dribbler",rarity:"Legendary",desc:"Yukimiya-style dribbling with a defensive lean.",flow:"Best with Monster"},
+{name:"Aiku",role:"Defender",rarity:"Mythic",desc:"Premier defensive style with trap and steal.",flow:"Best with Soul Harvester"},
+{name:"King / Barou",role:"Striker",rarity:"Mythic",desc:"Ruthless individualistic finisher.",flow:"Best with King's Instinct"},
+{name:"Kunigami",role:"Power Striker",rarity:"Mythic",desc:"Power shots paired with useful blocking.",flow:"Best with King's Instinct"},
+{name:"Rin",role:"Curve Striker",rarity:"Mythic",desc:"Signature curve shots into tough angles.",flow:"Best with Prodigy"},
+{name:"Shidou",role:"Aerial Striker",rarity:"Mythic",desc:"Wild striker built around aerial chaos.",flow:"Best with Demon Wings"},
+{name:"Yukimiya",role:"Flank Dribbler",rarity:"Mythic",desc:"High skill-ceiling carry style.",flow:"Best with Dribbler"},
+{name:"NEL Bachira",role:"Chaos Dribbler",rarity:"Mythic",desc:"Buffed Bachira with sharper transitions.",flow:"Best with Bee Freestyle"},
+{name:"NEL Reo",role:"Versatile Playmaker",rarity:"Mythic",desc:"Reo reworked with copy and dashing tools.",flow:"Best with Butterfly Dancer"},
+{name:"Charles",role:"Playmaker",rarity:"World Class",desc:"Balanced, dependable playmaking option.",flow:"Best with Genius"},
+{name:"NEL Isagi",role:"Playmaker",rarity:"World Class",desc:"Powered-up Isagi with sharper finishing.",flow:"Best with Genius"},
+{name:"NEL Nagi",role:"Trap Specialist",rarity:"World Class",desc:"Trap-and-control kit pushed to its limit.",flow:"Best with Emperor"},
+{name:"NEL Rin",role:"Curve Striker",rarity:"World Class",desc:"Amplified curve-shot kit.",flow:"Best with Destructive Impulse"},
+{name:"Don Lorenzo",role:"Midfielder",rarity:"Generational",desc:"Top meta midfield pick controlling tempo.",flow:"Best with Emperor"},
+{name:"Kaiser",role:"Striker",rarity:"Generational",desc:"Dominant pure striker in the current meta.",flow:"Best with Impulse"},
+{name:"Sae",role:"All-Rounding",rarity:"Generational",desc:"Like Rin but faster, combos with Shidou.",flow:"Best with Prodigy"},
+{name:"Lavinho",role:"Winger",rarity:"Master",desc:"Top-tier winger known for pace.",flow:"Best with King's Authority"},
+{name:"Loki",role:"All-Rounding",rarity:"Master",desc:"Extreme mobility for explosive attacks.",flow:"Best with Gale Burst"}
+];
+
 
 var rarityColor={"Rare":"#8893a3","Epic":"#3ad4ff","Legendary":"#ffb340","Mythic":"#b46bff","World Class":"#ff3656","Master":"#ffffff"};
 function renderStyles(filter){
