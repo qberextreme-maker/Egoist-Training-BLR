@@ -127,7 +127,8 @@ footer{padding:30px 5%;color:#8893a3;font-size:13px;border-top:1px solid #1f2633
 <script>
 var techs = [
 {name:"Feint Shot",cat:"shooting",diff:"Easy",desc:"Tap a kick low to fake the keeper before your real shot.",input:"Low Kick then Shot"},
-{name:"Volley Shot",cat:"shooting",diff:"Medium",desc:"Shoot the instant you receive a pass for extra speed.",input:"Pass plus Kick"},{name:"Header Shot",cat:"shooting",diff:"Hard",desc:"Pop the ball up, jump, and time a header on goal.",input:"Kick up, Jump, Header"},
+{name:"Volley Shot",cat:"shooting",diff:"Medium",desc:"Shoot the instant you receive a pass for extra speed.",input:"Pass plus Kick"},
+{name:"Header Shot",cat:"shooting",diff:"Hard",desc:"Pop the ball up, jump, and time a header on goal.",input:"Kick up, Jump, Header"},
 {name:"Rebound Shot",cat:"shooting",diff:"Medium",desc:"Lob the ball off the net so it bounces back to finish.",input:"Lob, Wait, Kick"},
 {name:"Double Header",cat:"shooting",diff:"Hard",desc:"Chain two headers in a row by re-timing your jump.",input:"Header then Header"},
 {name:"Trivela Shot",cat:"shooting",diff:"Hard",desc:"Strike with the outside of the foot for a curling finish.",input:"Outside-foot Kick"},
@@ -149,13 +150,6 @@ var techs = [
 {name:"Block",cat:"defending",diff:"Easy",desc:"Time a stationary block on a shot or pass.",input:"Hold Block"},
 {name:"Jockeying",cat:"defending",diff:"Medium",desc:"Backpedal facing the dribbler instead of tackling.",input:"Backwards movement"}
 ];
- Class
-function renderTechs(filter){
-var grid=document.getElementById('techGrid');
-grid.innerHTML='';
-for(var i=0;i<techs.length;i++){
-var t=techs[i];
-if(filter!=='all'&&t.cat!==filter)continue;grid.innerHTML+='<div class="card"><div class="card-top"><span class="card-cat">'+t.cat+'</span><span class="card-diff">'+t.diff+'</span></div><h3>'+t.name+'</h3><p>'+t.desc+'</p><span class="input-tag">'+t.input+'</span></div>';
 var styles = [
 {name:"Isagi",role:"Playmaker",rarity:"Rare",desc:"Strategic all-rounder rewarding good positioning.",flow:"Spatial Awareness"},
 {name:"Chigiri",role:"Speedster",rarity:"Rare",desc:"Built entirely around speed and stamina bursts.",flow:"Best with Puzzle"},
@@ -179,15 +173,18 @@ var styles = [
 {name:"NEL Isagi",role:"Playmaker",rarity:"World Class",desc:"Powered-up Isagi with sharper finishing.",flow:"Best with Genius"},
 {name:"NEL Nagi",role:"Trap Specialist",rarity:"World Class",desc:"Trap-and-control kit pushed to its limit.",flow:"Best with Emperor"},
 {name:"NEL Rin",role:"Curve Striker",rarity:"World Class",desc:"Amplified curve-shot kit.",flow:"Best with Destructive Impulse"},
-{name:"Don Lorenzo",role:"Midfielder",rarity:"Generational",desc:"Top meta midfield pick controlling tempo.",flow:"Best with Emperor"},
-{name:"Kaiser",role:"Striker",rarity:"Generational",desc:"Dominant pure striker in the current meta.",flow:"Best with Impulse"},
-{name:"Sae",role:"All-Rounding",rarity:"Generational",desc:"Like Rin but faster, combos with Shidou.",flow:"Best with Prodigy"},
+{name:"Don Lorenzo",role:"Midfielder",rarity:"World Class",desc:"Top meta midfield pick controlling tempo.",flow:"Best with Emperor"},
+{name:"Kaiser",role:"Striker",rarity:"World Class",desc:"Dominant pure striker in the current meta.",flow:"Best with Impulse"},
+{name:"Sae",role:"All-Rounding",rarity:"World Class",desc:"Like Rin but faster, combos with Shidou.",flow:"Best with Prodigy"},
 {name:"Lavinho",role:"Winger",rarity:"Master",desc:"Top-tier winger known for pace.",flow:"Best with King's Authority"},
 {name:"Loki",role:"All-Rounding",rarity:"Master",desc:"Extreme mobility for explosive attacks.",flow:"Best with Gale Burst"}
 ];
+grid.innerHTML+='<div class="card"><div class="card-top"><span class="card-cat">'+t.cat+'</span><span class="card-diff">'+t.diff+'</span></div><h3>'+t.name+'</h3><p>'+t.desc+'</p><span class="input-tag">'+t.input+'</span></div>';
+}
+}
 
+var rarityColor={"Rare":"#8893a3","Epic":"#3ad4ff","Mythic":"#b46bff","Legendary":"#ffb340","World Class":"#ff3656","Master Class":"#ffffff"};
 
-var rarityColor={"Rare":"#8893a3","Epic":"#3ad4ff","Legendary":"#ffb340","Mythic":"#b46bff","World Class":"#ff3656","Master":"#ffffff"};
 function renderStyles(filter){
 var grid=document.getElementById('styleGrid');
 grid.innerHTML='';
