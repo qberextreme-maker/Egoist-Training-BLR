@@ -181,16 +181,11 @@ var styles = [
 {name:"Loki",role:"All-Rounding",rarity:"Master",desc:"Extreme mobility for explosive attacks.",flow:"Best with Gale Burst"}
 ];
 
-function renderTechs(filter){
-var grid=document.getElementById('techGrid');
-grid.innerHTML='';
-for(var i=0;i<techs.length;i++){
-var t=techs[i];
-if(filter!=='all'&&t.cat!==filter)continue;grid.innerHTML+='<div class="card"><div class="card-top"><span class="card-cat">'+t.cat+'</span><span class="card-diff">'+t.diff+'</span></div><h3>'+t.name+'</h3><p>'+t.desc+'</p><span class="input-tag">'+t.input+'</span></div>';
+grid.innerHTML+='<div class="card"><div class="card-top"><span class="card-cat">'+t.cat+'</span><span class="card-diff">'+t.diff+'</span></div><h3>'+t.name+'</h3><p>'+t.desc+'</p><span class="input-tag">'+t.input+'</span></div>';
 }
 }
 
-var rarityColor={"Rare":"#8893a3","Epic":"#3ad4ff","legendary":"#b46bff","Mythic":"#ffb340","World Class":"#ff3656","Master":"#ffffff"};
+var rarityColor={"Rare":"#8893a3","Epic":"#3ad4ff","Mythic":"#b46bff","Legendary":"#ffb340","World Class":"#ff3656","Master Class":"#ffffff"};
 
 function renderStyles(filter){
 var grid=document.getElementById('styleGrid');
