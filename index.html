@@ -28,8 +28,11 @@ section h2{font-size:32px;text-transform:uppercase;}
 .tabs{display:flex;gap:8px;margin-bottom:30px;flex-wrap:wrap;}
 .tab{font-size:12px;text-transform:uppercase;padding:8px 14px;border:1px solid #1f2633;background:#11151f;color:#8893a3;cursor:pointer;border-radius:3px;}
 .tab.active{border-color:#3ad4ff;color:#3ad4ff;}
-.grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(280px,1fr));gap:16px;}
-.card{background:#11151f;border:1px solid #1f2633;padding:22px;border-radius:3px;}
+.grid{display:flex;overflow-x:auto;gap:16px;padding-bottom:12px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;}
+.grid::-webkit-scrollbar{height:6px;}
+.grid::-webkit-scrollbar-thumb{background:#3ad4ff;border-radius:3px;}
+.card{background:#11151f;border:1px solid #1f2633;padding:22px;border-radius:3px;flex:0 0 260px;scroll-snap-align:start;}
+.card-icon{font-size:28px;margin-bottom:10px;display:block;}
 .card-top{display:flex;justify-content:space-between;margin-bottom:10px;font-size:11px;text-transform:uppercase;}
 .card-cat{color:#ff3656;}
 .card-diff{color:#8893a3;}
@@ -85,10 +88,10 @@ footer{padding:30px 5%;color:#8893a3;font-size:13px;border-top:1px solid #1f2633
 <div class="tab active" data-filter="all">All</div>
 <div class="tab" data-filter="Rare">Rare</div>
 <div class="tab" data-filter="Epic">Epic</div>
-<div class="tab" data-filter="Mythic">Mythic</div>
 <div class="tab" data-filter="Legendary">Legendary</div>
+<div class="tab" data-filter="Mythic">Mythic</div>
 <div class="tab" data-filter="World Class">World Class</div>
-<div class="tab" data-filter="Master Class">Master Class</div>
+<div class="tab" data-filter="Master">Master</div>
 </div>
 <div class="grid" id="styleGrid"></div>
 </section>
@@ -125,9 +128,9 @@ footer{padding:30px 5%;color:#8893a3;font-size:13px;border-top:1px solid #1f2633
 <footer>EGO TRAINING - Unofficial fan site. Not affiliated with Roblox or the developers of Blue Lock Rivals.</footer>
 
 <script>
-var techs = [
-{name:"Feint Shot",cat:"shooting",diff:"Easy",desc:"Tap a kick low to fake the keeper before your real shot.",input:"Low Kick then Shot"},
-{name:"Volley Shot",cat:"shooting",diff:"Medium",desc:"Shoot the instant you receive a pass for extra speed.",input:"Pass plus Kick"},{name:"Header Shot",cat:"shooting",diff:"Hard",desc:"Pop the ball up, jump, and time a header on goal.",input:"Kick up, Jump, Header"},
+var techs = [{name:"Feint Shot",cat:"shooting",diff:"Easy",desc:"Tap a kick low to fake the keeper before your real shot.",input:"Low Kick then Shot"},
+{name:"Volley Shot",cat:"shooting",diff:"Medium",desc:"Shoot the instant you receive a pass for extra speed.",input:"Pass plus Kick"},
+{name:"Header Shot",cat:"shooting",diff:"Hard",desc:"Pop the ball up, jump, and time a header on goal.",input:"Kick up, Jump, Header"},
 {name:"Rebound Shot",cat:"shooting",diff:"Medium",desc:"Lob the ball off the net so it bounces back to finish.",input:"Lob, Wait, Kick"},
 {name:"Double Header",cat:"shooting",diff:"Hard",desc:"Chain two headers in a row by re-timing your jump.",input:"Header then Header"},
 {name:"Trivela Shot",cat:"shooting",diff:"Hard",desc:"Strike with the outside of the foot for a curling finish.",input:"Outside-foot Kick"},
@@ -152,45 +155,50 @@ var techs = [
 
 var styles = [
 {name:"Isagi",role:"Playmaker",rarity:"Rare",desc:"Strategic all-rounder rewarding good positioning.",flow:"Spatial Awareness"},
-{name:"Hiori",role:"Playmaker",rarity:"Rare",desc:"The best pure passer in the game.",flow:"Personalized Flow Ice"},
 {name:"Chigiri",role:"Speedster",rarity:"Rare",desc:"Built entirely around speed and stamina bursts.",flow:"Best with Puzzle"},
-{name:"Igaguri",role:"Midfielder",rarity:"Epic",desc:"Defensively stable central midfielder.",flow:"Best with Monster"},
+{name:"Hiori",role:"Playmaker",rarity:"Rare",desc:"Strong passer focused on dribbling and distribution.",flow:"Personalized Flow Ice"},
+{name:"Igaguri",role:"Defender",rarity:"Rare",desc:"Stealing, passing, and aerial defense fundamentals.",flow:"Best with Monster"},
 {name:"Bachira",role:"Dribbler",rarity:"Epic",desc:"Energetic, unpredictable close control.",flow:"Best with Monster"},
-{name:"King / Barou",role:"Striker",rarity:"Epic",desc:"Ruthless individualistic finisher.",flow:"Best with King's Instinct"},
 {name:"Gagamaru",role:"Goalkeeper",rarity:"Epic",desc:"The only dedicated goalkeeper style.",flow:"Best with Genius"},
 {name:"Kurona",role:"Passer",rarity:"Epic",desc:"Quick link-up plays and team chemistry.",flow:"Best with Genius"},
 {name:"Nagi",role:"Trap Specialist",rarity:"Legendary",desc:"Controls difficult passes naturally.",flow:"Best with Wildcard"},
-{name:"Reo",role:"Versatile Playmaker",rarity:"Legendary",desc:"Balanced offense and defense toolkit.",flow:"Best with Genius"},
 {name:"Otoya",role:"Evasive Dribbler",rarity:"Legendary",desc:"Stealthy, evasive movement style.",flow:"Best with Puzzle"},
 {name:"Karasu",role:"Defensive Dribbler",rarity:"Legendary",desc:"Yukimiya-style dribbling with a defensive lean.",flow:"Best with Monster"},
-{name:"Yukimiya",role:"Flank Dribbler",rarity:"Mythic",desc:"High skill-ceiling carry style.",flow:"Best with Dribbler"},
-{name:"Kunigami",role:"Power Striker",rarity:"Mythic",desc:"Power shots paired with useful blocking.",flow:"Best with King's Instinct"},
 {name:"Aiku",role:"Defender",rarity:"Mythic",desc:"Premier defensive style with trap and steal.",flow:"Best with Soul Harvester"},
-{name:"Charles",role:"Midfielder",rarity:"Mythic",desc:"Balanced, dependable midfield option.",flow:"Best with Genius"},
-{name:"Rin",role:"Curve Striker",rarity:"mythic",desc:"Signature curve shots into tough angles.",flow:"Best with Prodigy"},
+{name:"King / Barou",role:"Striker",rarity:"Mythic",desc:"Ruthless individualistic finisher.",flow:"Best with King's Instinct"},
+{name:"Kunigami",role:"Power Striker",rarity:"Mythic",desc:"Power shots paired with useful blocking.",flow:"Best with King's Instinct"},
+{name:"Rin",role:"Curve Striker",rarity:"Mythic",desc:"Signature curve shots into tough angles.",flow:"Best with Prodigy"},
 {name:"Shidou",role:"Aerial Striker",rarity:"Mythic",desc:"Wild striker built around aerial chaos.",flow:"Best with Demon Wings"},
-{name:"NEL Bachira",role:"Chaos Dribbler",rarity:"World Class",desc:"Buffed Bachira with sharper transitions.",flow:"Best with Bee Freestyle"},
-{name:"Sae",role:"Curve Striker",rarity:"World Class",desc:"Like Rin but faster, combos with Shidou.",flow:"Best with Prodigy"},
-{name:"Kaiser",role:"Center Forward",rarity:"World Class",desc:"Dominant pure striker in the current meta.",flow:"Best with Impulse"},
-{name:"Don Lorenzo",role:"Midfielder",rarity:"World Class",desc:"Top meta midfield pick controlling tempo.",flow:"Best with Emperor"},
+{name:"Yukimiya",role:"Flank Dribbler",rarity:"Mythic",desc:"High skill-ceiling carry style.",flow:"Best with Dribbler"},
+{name:"NEL Bachira",role:"Chaos Dribbler",rarity:"Mythic",desc:"Buffed Bachira with sharper transitions.",flow:"Best with Bee Freestyle"},
+{name:"NEL Reo",role:"Versatile Playmaker",rarity:"Mythic",desc:"Reo reworked with copy and dashing tools.",flow:"Best with Butterfly Dancer"},
+{name:"Charles",role:"Playmaker",rarity:"World Class",desc:"Balanced, dependable playmaking option.",flow:"Best with Genius"},
 {name:"NEL Isagi",role:"Playmaker",rarity:"World Class",desc:"Powered-up Isagi with sharper finishing.",flow:"Best with Genius"},
-{name:"NEL Rin",role:"Curve Striker",rarity:"World Class",desc:"Amplified curve-shot kit.",flow:"Best with Destructive Impulse"},
 {name:"NEL Nagi",role:"Trap Specialist",rarity:"World Class",desc:"Trap-and-control kit pushed to its limit.",flow:"Best with Emperor"},
-{name:"NEL Reo",role:"Versatile Playmaker",rarity:"World Class",desc:"Reo reworked and dramatically stronger.",flow:"Best with Butterfly Dancer"},
+{name:"NEL Rin",role:"Curve Striker",rarity:"World Class",desc:"Amplified curve-shot kit.",flow:"Best with Destructive Impulse"},
+{name:"Don Lorenzo",role:"Midfielder",rarity:"World Class",desc:"Top meta midfield pick controlling tempo.",flow:"Best with Emperor"},
+{name:"Kaiser",role:"Striker",rarity:"World Class",desc:"Dominant pure striker in the current meta.",flow:"Best with Impulse"},
+{name:"Sae",role:"All-Rounding",rarity:"World Class",desc:"Like Rin but faster, combos with Shidou.",flow:"Best with Prodigy"},
 {name:"Lavinho",role:"Winger",rarity:"Master",desc:"Top-tier winger known for pace.",flow:"Best with King's Authority"},
-{name:"Loki",role:"Master Class",rarity:"Master",desc:"Extreme mobility for explosive attacks.",flow:"Best with Gale Burst"}
+{name:"Loki",role:"All-Rounding",rarity:"Master",desc:"Extreme mobility for explosive attacks.",flow:"Best with Gale Burst"}
 ];
+
+var catIcon={"shooting":"⚽","dribbling":"🌀","passing":"🎯","defending":"🛡️"};
 
 function renderTechs(filter){
 var grid=document.getElementById('techGrid');
 grid.innerHTML='';
 for(var i=0;i<techs.length;i++){
 var t=techs[i];
-if(filter!=='all'&&t.cat!==filter)continue;grid.innerHTML+='<div class="card"><div class="card-top"><span class="card-cat">'+t.cat+'</span><span class="card-diff">'+t.diff+'</span></div><h3>'+t.name+'</h3><p>'+t.desc+'</p><span class="input-tag">'+t.input+'</span></div>';
+if(filter!=='all'&&t.cat!==filter)continue;
+var icon=catIcon[t.cat]||'⚽';
+grid.innerHTML+='<div class="card"><span class="card-icon">'+icon+'</span><div class="card-top"><span class="card-cat">'+t.cat+'</span><span class="card-diff">'+t.diff+'</span></div><h3>'+t.name+'</h3><p>'+t.desc+'</p><span class="input-tag">'+t.input+'</span></div>';
 }
-}
+  }}
 
-var rarityColor={"Rare":"#8893a3","Epic":"#3ad4ff","Mythic":"#b46bff","Legendary":"#ffb340","World Class":"#ff3656","Master":"#ffffff"};
+var rarityColor={"Rare":"#8893a3","Epic":"#3ad4ff","Legendary":"#ffb340","Mythic":"#b46bff","World Class":"#ff3656","Master":"#ffffff"};
+
+var roleIcon={"Playmaker":"🧠","Speedster":"💨","Dribbler":"🌀","Striker":"🔥","Goalkeeper":"🧤","Curve Striker":"🌪️","Passer":"🎯","Defender":"🛡️","Midfielder":"🧭","Chaos Dribbler":"🌀","Flank Dribbler":"🌀","Power Striker":"💥","Trap Specialist":"🪤","Aerial Striker":"🦅","Versatile Playmaker":"🧠","Evasive Dribbler":"👻","Defensive Dribbler":"🛡️","Winger":"💨","All-Rounding":"⭐"};
 
 function renderStyles(filter){
 var grid=document.getElementById('styleGrid');
@@ -199,7 +207,8 @@ for(var i=0;i<styles.length;i++){
 var s=styles[i];
 if(filter!=='all'&&s.rarity!==filter)continue;
 var color=rarityColor[s.rarity]||'#3ad4ff';
-grid.innerHTML+='<div class="card"><div class="card-top"><span class="card-cat">'+s.role+'</span><span class="card-diff" style="color:'+color+'">'+s.rarity+'</span></div><h3>'+s.name+'</h3><p>'+s.desc+'</p><span class="input-tag">'+s.flow+'</span></div>';
+var icon=roleIcon[s.role]||'⚽';
+grid.innerHTML+='<div class="card"><span class="card-icon">'+icon+'</span><div class="card-top"><span class="card-cat">'+s.role+'</span><span class="card-diff" style="color:'+color+'">'+s.rarity+'</span></div><h3>'+s.name+'</h3><p>'+s.desc+'</p><span class="input-tag">'+s.flow+'</span></div>';
 }
 }
 
