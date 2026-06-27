@@ -256,6 +256,11 @@ e.target.className='tab active';
 renderStyles(e.target.getAttribute('data-filter'));
 });
 
+function showField(which){
+document.getElementById('discordField').style.display = which==='discord' ? 'block' : 'none';
+document.getElementById('robloxField').style.display = which==='roblox' ? 'block' : 'none';
+}
+
 function copyDiscord(){
 var el=document.getElementById('discordId');
 navigator.clipboard.writeText(el.textContent);
