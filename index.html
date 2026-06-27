@@ -278,23 +278,6 @@ var original=btn.textContent;
 btn.textContent='Copied!';
 setTimeout(function(){btn.textContent=original;},1500);
 }
-
-function setPlatform(p){
-document.getElementById('platformField').value=p;
-document.getElementById('usernameLabel').textContent=p+' Username';
-document.getElementById('usernameField').placeholder=p==='Discord'?'e.g. rin_itoshi189':'e.g. ZoroMc_87';
-}
-
-document.getElementById('platformTabs').addEventListener('click',function(e){
-if(e.target.className.indexOf('tab')===-1)return;
-var all=document.querySelectorAll('#platformTabs .tab');
-for(var i=0;i<all.length;i++){all[i].className='tab';}
-e.target.className='tab active';
-var p=e.target.getAttribute('data-platform');
-document.getElementById('discordPanel').style.display=p==='Discord'?'block':'none';
-document.getElementById('robloxPanel').style.display=p==='Roblox'?'block':'none';
-});
-
 renderTechs('all');
 renderStyles('all');
 </script>
